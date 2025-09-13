@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class comprobante extends Model
+class Clientes extends Model
 {
     use HasFactory;
 
-    public function compras(){
-        return $this->hasMany(compras::class);
+    public function persona(){
+        return $this->belongsTo(persona::class);
     }
-    
+
     public function ventas(){
-        return $this->hasmany(ventas::class);
+        return $this->hasmany(ventas::class);    
     }
+
 }

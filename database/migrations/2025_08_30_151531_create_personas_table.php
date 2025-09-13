@@ -20,12 +20,12 @@ return new class extends Migration
             $table->foreignId('documento_id')->unique()->costrained('documento')->onDelete('cascade');
             $table->timestamps();
         });
-    }
+    }                       
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down(): void    
     {
         Schema::dropIfExists('personas');
     }
