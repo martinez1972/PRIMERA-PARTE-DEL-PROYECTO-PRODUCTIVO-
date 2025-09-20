@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorecategoriaRequest extends FormRequest
+class StoreCategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,10 @@ class StorecategoriaRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            //
+           'nombre' => 'required|max:69|unique:caracteristicas,nombre',
+           'descripcion' => 'nullable|max:255' 
         ];
     }
 }

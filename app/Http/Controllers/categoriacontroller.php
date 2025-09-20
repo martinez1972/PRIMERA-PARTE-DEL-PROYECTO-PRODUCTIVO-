@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorecategoriaRequest;
+use App\Models\caracteristica;
+use App\Models\categoria;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class categoriacontroller extends Controller
+class categoriaController extends Controller
 {
     
     public function index()
     {
+        $categorias = categoria::with('caracteristica')->get();
+        dd($categorias);
         return view('categorias.index');
     }
 
@@ -23,9 +29,23 @@ class categoriacontroller extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StorecategoriaRequest $request)
-    {
-     dd($request);
+    {  
+       //dd($request);  
+      try {
+        DB::beginTransaction();
+        $caracteristica = Caracteristica::create($request->validated());
+        $caracteristica->categoria()->create([
+            'caracteristica_id' =>$caracteristica->id 
+        ]);
+        DB::commit();
+      } catch (Exception $e) {
+        DB::rollback();
+      }
+
+
+      return redirect()->route('categorias.index')->with('succes','categoria registrada');
     }
+   
 
     /**
      * Display the specified resource.

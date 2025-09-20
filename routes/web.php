@@ -10,7 +10,7 @@ Route::get('/', function () {
 Route::view('/panel','panel.index')->name('panel');
 
 
-Route::resource('categorias',categoriacontroller::class);    
+Route::resource('categorias',Categoriacontroller::class);    
 
 Route::get('/login', function () {
     return view('auth.login');
